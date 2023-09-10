@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">GitHub User</string>
+    <string name="searchBar_hint">Search User</string>
+    <string name="title_activity_detail">DetailActivity</string>
+
+    <string name="user_fullName_title">User FullName Title</string>
+    <string name="github_title">GitHub Username</string>
+    <string name="followers_title">Followers</string>
+    <string name="following_title">Following</string>
+    <string name="repo_title">Repository</string>
+    <string name="image_profile_description">Image Profile</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="tab_text_1">Followers</string>
+    <string name="tab_text_2">Following</string>
+    <string name="default_zero_value">0</string>
+    <string name="image_user_profile">image user profile</string>
+</resources>
