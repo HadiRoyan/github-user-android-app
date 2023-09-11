@@ -1,4 +1,4 @@
-package com.hadroy.githubuser.data.retorfit
+package com.hadroy.githubuser.data.remote.retrofit
 
 import com.hadroy.githubuser.BuildConfig
 import okhttp3.Interceptor

@@ -4,14 +4,16 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.hadroy.githubuser.data.response.SearchResponse
-import com.hadroy.githubuser.data.response.UserItems
-import com.hadroy.githubuser.data.retorfit.ApiConfig
+import androidx.lifecycle.asLiveData
+import com.hadroy.githubuser.data.remote.response.SearchResponse
+import com.hadroy.githubuser.data.remote.response.UserItems
+import com.hadroy.githubuser.data.remote.retrofit.ApiConfig
+import com.hadroy.githubuser.setting.SettingPreferences
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
-class MainViewModel : ViewModel() {
+class MainViewModel(private val pref: SettingPreferences) : ViewModel() {
 
     private var _listUserItems = MutableLiveData<ArrayList<UserItems>>()
     val listUserItems: LiveData<ArrayList<UserItems>> = _listUserItems
@@ -75,6 +77,10 @@ class MainViewModel : ViewModel() {
             }
 
         })
+    }
+
+    fun getThemeSettings(): LiveData<Boolean> {
+        return pref.getThemeSetting().asLiveData()
     }
 
     companion object {

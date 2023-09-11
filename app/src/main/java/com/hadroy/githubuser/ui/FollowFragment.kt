@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.hadroy.githubuser.data.response.FollowsResponseItem
+import com.hadroy.githubuser.data.remote.response.FollowsResponseItem
 import com.hadroy.githubuser.databinding.FragmentFollowBinding
 import com.hadroy.githubuser.ui.adapter.FollowsAdapter
 import com.hadroy.githubuser.viewmodel.FollowViewModel

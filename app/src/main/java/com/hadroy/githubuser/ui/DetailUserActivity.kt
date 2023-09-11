@@ -1,6 +1,8 @@
 package com.hadroy.githubuser.ui
 
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.viewModels
 import androidx.annotation.StringRes
 import androidx.appcompat.app.AppCompatActivity
@@ -9,31 +11,51 @@ import com.bumptech.glide.Glide
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import com.hadroy.githubuser.R
-import com.hadroy.githubuser.data.response.DetailUserResponse
+import com.hadroy.githubuser.data.local.entity.FavoriteUser
+import com.hadroy.githubuser.data.remote.response.DetailUserResponse
 import com.hadroy.githubuser.databinding.ActivityDetailUserBinding
 import com.hadroy.githubuser.ui.adapter.SectionsPagerAdapter
 import com.hadroy.githubuser.viewmodel.DetailUserViewModel
+import com.hadroy.githubuser.viewmodel.factory.DetailUserViewModelFactory
 
 class DetailUserActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityDetailUserBinding
+    private val viewModel by viewModels<DetailUserViewModel> {
+        DetailUserViewModelFactory.getInstance(this.application)
+    }
 
-    private val detailUserViewModel by viewModels<DetailUserViewModel>()
+    private var isFavoriteUser: Boolean = false
+    private var avatarUrlCurrent: String? = null
+
+    var username: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDetailUserBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        setTopBar()
+        username = intent.getStringExtra(EXTRA_USERNAME)
+        viewModel.getDetailUser(username.toString())
 
-        val username = intent.getStringExtra(EXTRA_USERNAME)
-        detailUserViewModel.getDetailUser(username.toString())
-
-        detailUserViewModel.detailUser.observe(this) { detailUser ->
+        viewModel.detailUser.observe(this) { detailUser ->
+            avatarUrlCurrent = detailUser?.avatarUrl
             setData(detailUser)
         }
 
-        setupTabLayout(username!!)
 
+        viewModel.getFavoriteUserByUsername(username.toString()).observe(this) { favoriteUser ->
+            if (favoriteUser != null) {
+                isFavoriteUser = true
+                binding.fabAdd.setImageResource(R.drawable.ic_favorite)
+            } else {
+                isFavoriteUser = false
+                binding.fabAdd.setImageResource(R.drawable.ic_favorite_border)
+            }
+        }
+
+        setFAB(username)
+        setupTabLayout(username!!)
     }
 
 
@@ -61,6 +83,50 @@ class DetailUserActivity : AppCompatActivity() {
             tab.text = resources.getString(TAB_TITLES[position])
         }.attach()
 
+    }
+
+    private fun setTopBar() {
+        binding.topAppBar.setNavigationOnClickListener { v ->
+            Log.d("Navigation", "onClick: ${v.id}")
+            onBackPressed()
+        }
+
+        binding.topAppBar.setOnMenuItemClickListener { menuItem ->
+            when (menuItem.itemId) {
+                R.id.setting_page -> {
+                    startActivity(Intent(this@DetailUserActivity, SettingActivity::class.java))
+                    true
+                }
+
+                R.id.share -> {
+                    val userAccountLink = "https://github.com/$username"
+                    val share = Intent.createChooser(Intent().apply {
+                        action = Intent.ACTION_SEND
+                        type = "text/plain"
+                        putExtra(
+                            Intent.EXTRA_TEXT,
+                            userAccountLink
+                        )
+                        putExtra(Intent.EXTRA_TITLE, "GitHub $username previews")
+                    }, "Share")
+                    startActivity(share)
+                    true
+                }
+
+                else -> false
+            }
+        }
+    }
+
+    private fun setFAB(username: String?) {
+        binding.fabAdd.setOnClickListener {
+            val favoriteUser = FavoriteUser(username.toString(), avatarUrlCurrent)
+            if (!isFavoriteUser) {
+                viewModel.insert(favoriteUser)
+            } else {
+                viewModel.delete(favoriteUser)
+            }
+        }
     }
 
     companion object {

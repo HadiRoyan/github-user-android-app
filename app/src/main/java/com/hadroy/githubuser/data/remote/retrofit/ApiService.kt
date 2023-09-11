@@ -1,8 +1,8 @@
-package com.hadroy.githubuser.data.retorfit
+package com.hadroy.githubuser.data.remote.retrofit
 
-import com.hadroy.githubuser.data.response.DetailUserResponse
-import com.hadroy.githubuser.data.response.FollowsResponseItem
-import com.hadroy.githubuser.data.response.SearchResponse
+import com.hadroy.githubuser.data.remote.response.DetailUserResponse
+import com.hadroy.githubuser.data.remote.response.FollowsResponseItem
+import com.hadroy.githubuser.data.remote.response.SearchResponse
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Path

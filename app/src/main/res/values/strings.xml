@@ -16,4 +16,11 @@
     <string name="tab_text_2">Following</string>
     <string name="default_zero_value">0</string>
     <string name="image_user_profile">image user profile</string>
+    <string name="fab_icon_description">icon add to favorite</string>
+    <string name="favorite">Favorite</string>
+    <string name="setting">Setting</string>
+
+    <string name="dark_mode">Dark Mode</string>
+    <string name="share">Share</string>
+
 </resources>

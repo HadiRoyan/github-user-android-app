@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.hadroy.githubuser.data.response.UserItems
+import com.hadroy.githubuser.data.remote.response.UserItems
 import com.hadroy.githubuser.databinding.ItemSearchUserBinding
 
 class UserAdapter(private var listUserItems: ArrayList<UserItems>) :

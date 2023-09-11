@@ -4,8 +4,8 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.hadroy.githubuser.data.response.FollowsResponseItem
-import com.hadroy.githubuser.data.retorfit.ApiConfig
+import com.hadroy.githubuser.data.remote.response.FollowsResponseItem
+import com.hadroy.githubuser.data.remote.retrofit.ApiConfig
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
