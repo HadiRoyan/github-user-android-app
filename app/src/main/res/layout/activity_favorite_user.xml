@@ -21,9 +21,8 @@
             app:title="Favorite User"
             app:menu="@menu/top_bar_menu"
             app:navigationIcon="@drawable/ic_arrow_back"
-            android:paddingVertical="4dp"
-            android:paddingEnd="14dp"
-            android:paddingStart="8dp"
+            android:paddingEnd="8dp"
+            android:paddingStart="1dp"
             style="@style/Theme.GitHubUser.ToolBar" />
 
     </com.google.android.material.appbar.AppBarLayout>

@@ -14,7 +14,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:paddingEnd="8dp"
-        android:paddingStart="8dp" />
+        android:paddingStart="8dp"
+        app:menu="@menu/main_menu" />
 
     <com.google.android.material.search.SearchView
         android:id="@+id/searchView"

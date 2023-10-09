@@ -48,7 +48,6 @@ class MainActivity : AppCompatActivity() {
     private fun setupSearchView() {
         with(binding) {
             searchBar.hint = "Search user"
-            searchBar.inflateMenu(R.menu.main_menu)
             searchBar.setOnMenuItemClickListener {
                 when (it.itemId) {
                     R.id.favorite_page -> showFavoritePage()
