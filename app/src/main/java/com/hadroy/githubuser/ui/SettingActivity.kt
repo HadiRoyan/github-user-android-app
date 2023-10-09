@@ -18,6 +18,7 @@ class SettingActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivitySettingBinding.inflate(layoutInflater)
         setContentView(binding.root)
+        setTopBar()
 
         val switchTheme = binding.switchTheme
 
@@ -39,6 +40,12 @@ class SettingActivity : AppCompatActivity() {
 
         switchTheme.setOnCheckedChangeListener { _: CompoundButton?, isChecked: Boolean ->
             viewModel.saveThemeSetting(isChecked)
+        }
+    }
+
+    private fun setTopBar() {
+        binding.topAppBar.setNavigationOnClickListener { _ ->
+            onBackPressed()
         }
     }
 }
